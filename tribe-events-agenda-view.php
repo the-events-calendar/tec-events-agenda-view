@@ -51,6 +51,8 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
       $this->pluginUrl = trailingslashit( plugins_url().'/'.$this->pluginDir );
       $this->agendaSlug = sanitize_title(__('agenda', 'tribe-event-agenda-view'));
 
+      require_once( 'template-tags.php' );
+
       // settings tab
       add_action( 'tribe_settings_do_tabs', array( $this, 'settings_tab' ) );
 
@@ -65,6 +67,9 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
 
       // make sure everything is ready in the query for agenda
       add_filter( 'tribe_events_pre_get_posts', array( $this, 'pre_get_posts'));
+
+      // load the proper template hooks (agenda) for the permalink
+      add_filter( 'tribe_current_events_page_template', array( $this, 'select_page_template' ) );
 
     }
 
@@ -139,7 +144,33 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
     }
 
     function pre_get_posts( $query ){
-      
+      $agenda_query = false;
+      $query->tribe_is_agenda = false;
+      if(!empty( $query->query_vars['eventDisplay'] )) {
+        $agenda_query = true;
+        if ( $query->query_vars['eventDisplay'] == 'agenda' ) {
+          $event_date = $query->get('eventDate') != '' ? $query->get('eventDate') : Date('Y-m-d');
+          $query->set( 'start_date', tribe_event_beginning_of_day( $event_date ) );
+          $query->set( 'end_date', tribe_event_end_of_day( $event_date ) );
+          $query->set( 'eventDate', $event_date );
+          $query->set( 'orderby', 'event_date' );
+          $query->set( 'order', 'ASC' );
+          $query->set( 'posts_per_page', -1 ); // show ALL day posts
+          $query->set( 'hide_upcoming', false );
+          $query->tribe_is_agenda = true;
+        }
+      }
+      $query->tribe_is_event_agenda_query = $agenda_query;
+      return $query->tribe_is_event_agenda_query ? apply_filters('tribe_events_agenda_pre_get_posts', $query) : $query;
+    }
+
+    function select_page_template( $template ){
+      // agenda view
+      if( tribe_is_agenda() ) {
+        $template = TribeEventsTemplates::getTemplateHierarchy('agenda','','agenda', $this->pluginPath);
+        $template = TribeEventsTemplates::getTemplateHierarchy('list');
+      }
+      return $template;
     }
 
     /**
