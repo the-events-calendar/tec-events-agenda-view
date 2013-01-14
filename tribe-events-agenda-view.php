@@ -188,7 +188,7 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
     }
 
     public function fail_notices() {
-      printf( '<div class="error"><p>%s</p></div>', sprintf( self::__( '%1$s requires WordPress v%2$s or higher and The Events Calendar v%3$s or higher.' ), self::PLUGIN_NAME, self::MIN_WP_VERSION, self::REQUIRED_TEC_VERSION ) );
+      printf( '<div class="error"><p>%s</p></div>', sprintf( __( '%1$s requires WordPress v%2$s or higher and The Events Calendar v%3$s or higher.' ), self::PLUGIN_NAME, self::MIN_WP_VERSION, self::REQUIRED_TEC_VERSION ) );
     }
 
     /* Static Singleton Factory Method */
