@@ -18,10 +18,7 @@ if( !class_exists('Tribe_Events_Agenda_Template')){
 		static $timeslots = array();
 
 		public static function init(){
-
-			add_filter( 'tribe_events_list_the_title', array( __CLASS__, 'the_title' ), 10, 1 );
-		
-			
+	
 			// clear out list hooks
 			add_filter( 'tribe_events_list_show_separators', '__return_false' );
 			add_filter( 'tribe_events_list_before_the_content', '__return_false' );
@@ -31,12 +28,9 @@ if( !class_exists('Tribe_Events_Agenda_Template')){
 			add_filter( 'tribe_events_list_the_meta', '__return_false' );
 			add_filter( 'tribe_events_list_after_the_meta', '__return_false' );
 
-
-
-			add_filter( 'tribe_get_ical_link', array(__CLASS__,'ical_link'), 20, 1 );
-
 			// Override list hooks
 			add_filter( 'tribe_events_list_the_event_title', array( __CLASS__, 'the_event_title' ), 20, 1 );
+			add_filter( 'tribe_events_list_the_title', array( __CLASS__, 'the_title' ), 10, 1 );
 			add_filter( 'tribe_events_list_before_header', array( __CLASS__, 'before_header' ), 20, 1 );
 			add_filter( 'tribe_events_list_before_header_nav', array( __CLASS__, 'before_header_nav' ), 20, 1 );
 			add_filter( 'tribe_events_list_header_nav', array( __CLASS__, 'header_navigation' ), 20, 1 );
@@ -45,6 +39,7 @@ if( !class_exists('Tribe_Events_Agenda_Template')){
 			add_filter( 'tribe_events_list_before_footer', array( __CLASS__, 'before_footer' ), 20, 1 );
 			add_filter( 'tribe_events_list_before_footer_nav', array( __CLASS__, 'before_footer_nav' ), 20, 1 );
 			add_filter( 'tribe_events_list_footer_nav', array( __CLASS__, 'footer_navigation' ), 20, 1 );
+			
 		}
 
 		function the_title( $html ){

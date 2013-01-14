@@ -120,7 +120,7 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
     function setup_agenda_in_bar( $views ) {
       $views[] = array( 'displaying' => 'agenda',
                         'anchor'     => __( 'Agenda', 'tribe-event-agenda-view' ),
-                        'url'        => tribe_get_week_permalink() );
+                        'url'        => tribe_get_agenda_permalink() );
       return $views;
     }
 
