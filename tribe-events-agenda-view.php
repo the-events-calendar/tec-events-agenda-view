@@ -100,8 +100,8 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
   				),
   				'agendaViewLimit' => array(
   					'type' => 'text',
-  					'label' => __( 'Limit Amount Per Day', 'tribe-event-agenda-view' ),
-            'tooltip' => __( 'If more events occur on a given day we will link to day view if \'The Events Calendar PRO\' is available.', 'tribe-event-agenda-view' ),
+  					'label' => __( 'Limit Events', 'tribe-event-agenda-view' ),
+            'tooltip' => __( 'Limit the amount of events that show on the Agenda View.', 'tribe-event-agenda-view' ),
             'size' => 'small',
             'default' => get_option( 'posts_per_page' ),
             'validation_type' => 'positive_int'
@@ -114,7 +114,7 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
   		);
 
       // instantiate the tab (positioned order before core help tab)
-      new TribeSettingsTab( 'agenda', __( 'Agenda View', 'tribe-event-agenda-view' ), $settings );
+      new TribeSettingsTab( 'agenda', __( 'Agenda', 'tribe-event-agenda-view' ), $settings );
     }
 
     function setup_agenda_in_bar( $views ) {
@@ -149,13 +149,12 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
       if(!empty( $query->query_vars['eventDisplay'] )) {
         $agenda_query = true;
         if ( $query->query_vars['eventDisplay'] == 'agenda' ) {
-          $event_date = $query->get('eventDate') != '' ? $query->get('eventDate') : Date('Y-m-d');
-          $query->set( 'start_date', tribe_event_beginning_of_day( $event_date ) );
-          $query->set( 'end_date', tribe_event_end_of_day( $event_date ) );
+          $event_date = $query->get('eventDate') != '' ? $query->get('eventDate') : tribe_event_beginning_of_day( Date('Y-m-d') );
+          $query->set( 'start_date', $event_date );
           $query->set( 'eventDate', $event_date );
           $query->set( 'orderby', 'event_date' );
           $query->set( 'order', 'ASC' );
-          $query->set( 'posts_per_page', -1 ); // show ALL day posts
+          $query->set( 'posts_per_page', tribe_get_option( 'agendaViewLimit', '10' ) ); // show ALL day posts
           $query->set( 'hide_upcoming', false );
           $query->tribe_is_agenda = true;
         }
