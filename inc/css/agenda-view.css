@@ -1,0 +1,55 @@
+.tribe-agenda-event-description {
+	display: none;
+	margin-top: 30px;
+}
+
+.tribe-events-list.tribe-events-agenda .tribe-events-event-details h3, 
+.tribe-events-list.tribe-events-agenda .tribe-events-event-meta {
+	margin: 0;
+}
+
+.tribe-events-list.tribe-events-agenda .vevent.hentry {
+	border: none;
+	padding: 0 0 20px 0;
+}
+
+.tribe-events-agenda .tribe-events-day-time-slot {
+	margin: 30px 0;
+	padding: 30px 0;
+	border-bottom: 4px double #ddd;
+}
+
+.tribe-events-agenda .tribe-events-day-time-slot h5 {
+	padding: 0 10px;
+	margin: 0 0 20px;
+}
+
+.tribe-events-agenda .agenda-event-heading {
+	padding: 10px;
+	background: #fafafa;
+	border: 1px solid #eee;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;	
+}
+
+.tribe-events-agenda .agenda-event-heading:hover {
+	background: #fff;
+	cursor: pointer;
+	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 10px;
+	box-shadow: rgba(0,0,0, 0.1) 0px 0px 10px;
+	-webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;	
+} 
+
+.tribe-events-list.tribe-events-agenda .tribe-events-event-cost {
+	right: 10px;
+}
