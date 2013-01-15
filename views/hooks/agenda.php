@@ -25,9 +25,6 @@ if( !class_exists('Tribe_Events_Agenda_Template')){
 			add_filter( 'tribe_events_list_the_event_image', '__return_false' );
 			add_filter( 'tribe_events_list_the_content', '__return_false' );
 			add_filter( 'tribe_events_list_after_the_content', '__return_false' );
-			add_filter( 'tribe_events_list_before_the_meta', '__return_false' );
-			add_filter( 'tribe_events_list_the_meta', '__return_false' );
-			add_filter( 'tribe_events_list_after_the_meta', '__return_false' );
 			add_filter( 'tribe_events_list_header_nav', '__return_false' );
 			add_filter( 'tribe_events_list_footer_nav', '__return_false' );
 			add_filter( 'tribe_events_list_before_footer_nav', '__return_false' );
