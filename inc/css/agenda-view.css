@@ -58,26 +58,3 @@
 	right: 10px;
 	top: 10px;
 }
-
-/* Add Agenda View Icon to views dropdown */
-
-.tribe-select2-results .tribe-icon-agenda,
-.tribe-select2 .tribe-icon-agenda,
-.tribe-bar-view-list a.tribe-icon-agenda {
-	background-image: url(../images/icon-agenda.png);
-	-webkit-background-size: 15px 16px;
-    		background-size: 15px 16px;
-}
-
-@media 
-only screen and (-moz-min-device-pixel-ratio: 2),
-only screen and (-o-min-device-pixel-ratio: 2/1),
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-device-pixel-ratio: 2) {
-.tribe-select2-results .tribe-icon-agenda,
-.tribe-select2 .tribe-icon-agenda,
-.tribe-bar-view-list a.tribe-icon-agenda {
-	background-image: url(../images/icon-agenda@2x.png);
-	-webkit-background-size: 15px 16px;
-    		background-size: 15px 16px;
-}
