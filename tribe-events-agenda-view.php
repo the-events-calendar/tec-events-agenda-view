@@ -52,6 +52,7 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
       $this->agendaSlug = sanitize_title(__('agenda', 'tribe-event-agenda-view'));
 
       require_once( 'template-tags.php' );
+      require_once( 'tribe-agenda-view-template-class.php' );
 
       // settings tab
       add_action( 'tribe_settings_do_tabs', array( $this, 'settings_tab' ) );
@@ -59,17 +60,20 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
       // inject agenda view into events bar & (display) settings
       add_filter( 'tribe-events-bar-views', array( $this, 'setup_agenda_in_bar' ), 40, 1 );
 
-      // add appropriate body_classes if we're on the right view
-      add_filter( 'body_class', array( $this, 'body_class') );
-
       // setup permalink routes
       add_filter( 'generate_rewrite_rules', array( $this, 'add_routes' ) );
 
       // make sure everything is ready in the query for agenda
       add_filter( 'tribe_events_pre_get_posts', array( $this, 'pre_get_posts'));
 
+      // instantiate the template class
+      add_action( 'template_redirect', array( $this, 'setup_template_class') );
+
       // load the proper template hooks (agenda) for the permalink
       add_filter( 'tribe_current_events_page_template', array( $this, 'select_page_template' ) );
+
+      // add this plugin path to the views path
+      add_filter( 'tribe_events_template_paths', array( $this, 'template_paths' ) );
 
     }
 
@@ -124,15 +128,6 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
       return $views;
     }
 
-    function body_class( $classes ){
-      if( TribeEvents::instance()->displaying == 'agenda' ) {
-          $classes[] = ' tribe-events-agenda';
-          // remove the default gridview class from core
-          $classes = array_diff($classes, array('events-gridview'));
-      }
-      return $classes;
-    }
-
     function add_routes( $wp_rewrite ){
 
       // create new rules for the agenda permalinks
@@ -163,11 +158,14 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
       return $query->tribe_is_event_agenda_query ? apply_filters('tribe_events_agenda_pre_get_posts', $query) : $query;
     }
 
+    function setup_template_class () {
+      tribe_initialize_view('Tribe_Events_Agenda_Template');
+    }
+
     function select_page_template( $template ){
       // agenda view
       if( tribe_is_agenda() ) {
-        $template = TribeEventsTemplates::getTemplateHierarchy('agenda','','agenda', $this->pluginPath);
-        $template = TribeEventsTemplates::getTemplateHierarchy('list');
+        $template = TribeEventsTemplates::getTemplateHierarchy('agenda');
       }
       return $template;
     }
@@ -198,6 +196,20 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
       }
       return self::$instance;
     }
+    /**
+     * Add agenda plugin path to the templates array
+     *
+     * @param $template_paths array
+     * @return array
+     * @since 1.0
+     **/
+    function template_paths( $template_paths = array() ) {
+
+      array_unshift($template_paths, $this->pluginPath);
+      return $template_paths;
+
+    }
+
   }
 
   /**
