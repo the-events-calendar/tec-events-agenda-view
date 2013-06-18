@@ -3,7 +3,7 @@
  * @for Day Template
  * This file contains hooks and functions required to set up the day view.
  *
- * @package TribeEventsCalendarPro
+ * @package TribeAgenda
  * @since  3.0
  * @author Modern Tribe Inc.
  *
@@ -118,35 +118,6 @@ if( !class_exists('Tribe_Events_Agenda_Template')){
 				$wp_query->rewind_posts();
 			}
 
-		}
-
-		/**
-		 * Set up the notices for this template
-		 *
-		 * @return void
-		 * @since 1.0
-		 **/
-		public function set_notices() {
-
-			parent::set_notices();
-
-			global $wp_query;
-
-			// Look for a search query
-			if( !empty( $wp_query->query_vars['s'] )){
-				$search_term = $wp_query->query_vars['s'];
-			} else if( !empty($_POST['tribe-bar-search'])) {
-				$search_term = $_POST['tribe-bar-search'];
-			}
-
-			// Search term based notices
-			if( !empty($search_term) && !have_posts() ) {
-				TribeEvents::setNotice( 'event-search-no-results', sprintf( __( 'There were no results found for <strong>"%s"</strong> on this day. Try searching another day.', 'tribe-events-calendar-pro' ), $search_term ) );
-			}
-			// No events found on this day
-			else if ( empty($search_term) && empty( $wp_query->query_vars['s'] ) && !have_posts() ) { // Messages if currently no events, and no search term
-				TribeEvents::setNotice( 'events-not-found', sprintf( __( 'No events scheduled for <strong>%s</strong>. Please try another day.', 'tribe-events-calendar-pro' ), date_i18n( 'F d, Y', strtotime( get_query_var( 'eventDate' ) ) ) ) );
-			}
 		}
 	}
 }
