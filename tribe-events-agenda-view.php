@@ -159,7 +159,9 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
     }
 
     function setup_template_class () {
-      tribe_initialize_view('Tribe_Events_Agenda_Template');
+      if (tribe_is_agenda()) {
+        tribe_initialize_view('Tribe_Events_Agenda_Template');
+      }
     }
 
     function select_page_template( $template ){
