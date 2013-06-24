@@ -14,6 +14,8 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 if( !class_exists('Tribe_Events_Agenda_Template')){
 	class Tribe_Events_Agenda_Template extends Tribe_Template_Factory {
 
+		protected $body_class = 'tribe-events-agenda';
+
 		/**
 		 * Constructor
 		 *
@@ -39,20 +41,6 @@ if( !class_exists('Tribe_Events_Agenda_Template')){
 			add_filter( 'tribe_get_ical_link', array( $this, 'ical_link' ), 20, 1 );
 			add_filter( 'tribe_events_header_attributes',  array( $this, 'header_attributes' ) );
 			add_filter( 'tribe_get_events_title',  array( $this, 'the_title' ) );
-			add_filter( 'body_class',  array( $this, 'body_class' ) );
-		}
-
-		/**
-		 * Add agenda body class
-		 *
-		 * @return void
-		 * @author 
-		 **/
-		public function body_class ( $classes ) {
-			if( tribe_is_agenda() ) {
-				$classes[] = ' tribe-events-agenda';
-			}
-			return $classes;
 		}
 
 		/**
