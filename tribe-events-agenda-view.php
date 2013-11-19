@@ -190,14 +190,19 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
 			printf( '<div class="error"><p>%s</p></div>', sprintf( __( '%1$s requires WordPress v%2$s or higher and The Events Calendar v%3$s or higher.' ), self::PLUGIN_NAME, self::MIN_WP_VERSION, self::REQUIRED_TEC_VERSION ) );
 		}
 
-		/* Static Singleton Factory Method */
-		public static function instance() {
-			if ( !isset( self::$instance ) ) {
-				$className = __CLASS__;
-				self::$instance = new $className;
-			}
-			return self::$instance;
-		}
+    /**
+     * Static Singleton Factory Method
+     *
+     * @return TribeAgenda
+     **/
+    public static function instance() {
+         if ( !isset( self::$instance ) ) {
+              $className = __CLASS__;
+              self::$instance = new $className;
+         }
+         return self::$instance;
+    }
+
 		/**
 		 * Add agenda plugin path to the templates array
 		 *
