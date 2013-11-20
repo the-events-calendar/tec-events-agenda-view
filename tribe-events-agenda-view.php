@@ -176,7 +176,7 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
 		 * Check the minimum WP version and if TribeEvents exists
 		 *
 		 * @static
-		 * @param string	$wp_version
+		 * @param string $wp_version
 		 * @return bool Whether the test passed
 		 */
 		public static function prerequisites( $wp_version = null ) {;
@@ -185,6 +185,12 @@ if ( ! class_exists( 'TribeAgenda' ) ) {
 			$pass = $pass && version_compare( is_null( $wp_version ) ? get_bloginfo( 'version' ) : $wp_version, self::MIN_WP_VERSION, '>=' );
 			return $pass;
 		}
+
+    /**
+     * Display a failure notice in the WordPress admin if the versions are not compatible
+     *
+     * @return void
+     */
 
 		public function fail_notices() {
 			printf( '<div class="error"><p>%s</p></div>', sprintf( __( '%1$s requires WordPress v%2$s or higher and The Events Calendar v%3$s or higher.' ), self::PLUGIN_NAME, self::MIN_WP_VERSION, self::REQUIRED_TEC_VERSION ) );
