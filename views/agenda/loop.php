@@ -2,13 +2,6 @@
 /**
  * Agenda View Loop
  * This file sets up the structure for the agenda loop
- *
- * Override this template in your own theme by creating a file at [your-theme]/tribe-events/agenda/loop.php
- *
- * @package TribeAgenda
- * @since  1.0
- * @author Modern Tribe Inc.
- *
  */
 
 if ( !defined('ABSPATH') ) { die('-1'); } ?>

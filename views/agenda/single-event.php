@@ -2,13 +2,6 @@
 /**
  * Agenda View Single Event
  * This file contains one event in the agenda view
- *
- * Override this template in your own theme by creating a file at [your-theme]/tribe-events/agenda/single-event.php
- *
- * @package TribeAgenda
- * @since  1.0
- * @author Modern Tribe Inc.
- *
  */
 
 if ( !defined('ABSPATH') ) { die('-1'); } ?>

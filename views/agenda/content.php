@@ -1,15 +1,7 @@
 <?php
 /**
  * Agenda View Content Template
- * The content template for the agenda view. This template is also used for
- * the response that is returned on list view ajax requests.
- *
- * Override this template in your own theme by creating a file at [your-theme]/tribe-events/agenda/content.php
- * 
- * @package TribeAgenda
- * @since  1.0
- * @author Modern Tribe Inc.
- *
+ * The content template for the agenda view. 
  */
 
 if ( !defined('ABSPATH') ) { die('-1'); } ?>

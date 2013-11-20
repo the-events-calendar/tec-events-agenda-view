@@ -2,13 +2,6 @@
 /**
  * Agenda View Template
  * The wrapper template for the sample agenda view plugin. 
- *
- * Override this template in your own theme by creating a file at [your-theme]/tribe-events/agenda.php
- *
- * @package TribeAgenda
- * @since  1.0
- * @author Modern Tribe Inc.
- *
  */
 
 if ( !defined('ABSPATH') ) { die('-1'); } ?>
